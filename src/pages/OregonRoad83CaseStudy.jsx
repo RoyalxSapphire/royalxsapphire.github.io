@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import heroClip from "../assets/or83/intro_countdown.mp4";
-import posterImg from "../assets/or83/Keona_Hicks_Summer_Research_Poster.png";
-import posterPdf from "../assets/or83/Keona_Hicks_Summer_Research_Poster.pdf";
+import posterImg from "../assets/or83/keona_hicks_summer_research_poster.png";
+import posterPdf from "../assets/or83/keona_hicks_summer_research_poster.pdf";
 import tvOff from "../assets/or83/tv_off.png";
 import tvOn from "../assets/or83/tv_on.png";
 import tvEbs from "../assets/or83/tv_ebs.png";
