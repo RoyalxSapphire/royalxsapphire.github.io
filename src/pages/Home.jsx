@@ -2,6 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Mail, ArrowDown } from 'lucide-react';
 
+// Project thumbnails. Verify these paths match where your assets live
+// relative to this file (they follow the same "../assets/..." convention
+// your case study pages use). Set a project's `thumb` to null to fall back
+// to the numbered placeholder tile.
+import or83Thumb from '../assets/or83/tv_new_years.png'; // the Happy New Year 1983 TV frame
+import quizletThumb from '../assets/flashclash/dashboard.png';
+// import craigslistThumb from '../assets/craigslist/redesign_home.png';
+// import houseplantThumb from '../assets/houseplant/mockup.png';
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -34,42 +43,48 @@ export default function Home() {
     {
       id: 1,
       number: '01',
-      title: 'Craigslist Redesign',
-      subtitle: 'A research-backed redesign that cut task time in half',
-      category: 'UI/UX · Research-Driven Redesign',
+      title: "Oregon Road '83",
+      subtitle: 'UI and pixel art for a narrative game',
+      category: 'Game UI · Pixel Art',
       year: '2026',
-      tags: ['Canva', 'UX Research', 'Usability Testing'],
-      href: '/work/craigslist-redesign',
+      tags: ['Aseprite', 'Pixel Art', 'Game UI'],
+      thumb: or83Thumb,
+      href: '/work/oregon-road-83'
     },
     {
       id: 2,
       number: '02',
+      title: 'Houseplant Care App',
+      subtitle: 'A houseplant app that helps keep your plant babies healthy (in progress)',
+      category: 'UX Case Study',
+      year: '2025',
+      tags: ['Figma', 'User Research', 'Personas'],
+      thumb: null,
+      ph: { from: '#E7EFDD', to: '#D3E5C4', ink: '#5E8C4A', label: 'In progress' },
+      href: '/work/houseplant-care-app'
+    },
+    {
+      id: 3,
+      number: '03',
       title: 'Quizlet Redesign',
       subtitle: 'Rethinking study flows for speed and focus',
       category: 'UI/UX · Front-End',
       year: '2026',
       tags: ['React', 'Next.js', 'UI Design'],
+      thumb: quizletThumb,
       href: '/work/quizlet-redesign'
-    },
-    {
-      id: 3,
-      number: '03',
-      title: 'Cosplay Build Tracker',
-      subtitle: 'A build-tracking app for cosplayers, end to end',
-      category: 'UX Case Study',
-      year: '2025',
-      tags: ['Figma', 'User Research', 'Personas'],
-      href: null, // add '/work/cosplay-tracker' once i add its route
     },
     {
       id: 4,
       number: '04',
-      title: "Oregon Road '83",
-      subtitle: 'UI and pixel art for a narrative game (in progress)',
-      category: 'Game UI · Pixel Art',
+      title: 'Craigslist Redesign',
+      subtitle: 'A research-backed redesign that cut task time in half',
+      category: 'UI/UX · Research-Driven Redesign',
       year: '2026',
-      tags: ['Aseprite', 'Pixel Art', 'Game UI'],
-      href: null, // landing end of August
+      tags: ['Canva', 'UX Research', 'Usability Testing'],
+      thumb: null,
+      ph: { from: '#DFE6FB', to: '#C1CCF3', ink: '#2643B6', label: 'Case study' },
+      href: '/work/craigslist-redesign',
     },
   ];
 
@@ -373,37 +388,50 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-20">
-          {projects.map((project, idx) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+          {projects.map((project, idx) => {
+            const ph = project.ph || { from: '#f4e4dc', to: '#e0c4b6', ink: '#b8736e', label: project.href ? 'View case study' : 'Preview · Coming Soon' };
+            return (
             <Link
               key={project.id}
               to={project.href || '#'}
-              className={`project-card group block ${idx % 2 === 1 ? 'md:mt-24' : ''}`}
+              className={`project-card group block ${idx % 2 === 1 ? 'md:mt-16' : ''}`}
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="relative aspect-[4/5] mb-6 overflow-hidden" style={{ backgroundColor: '#f4e4dc' }}>
-                <div className="project-image absolute inset-0 flex items-center justify-center">
-                  <div className="absolute inset-0" style={{
-                    background: `linear-gradient(135deg, #f4e4dc 0%, #ebd4c8 50%, #e0c4b6 100%)`
-                  }} />
-                  <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 400 500" preserveAspectRatio="none">
-                    <defs>
-                      <pattern id={`p-${project.id}`} x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                        <circle cx="20" cy="20" r="1" fill="#b8736e" />
-                      </pattern>
-                    </defs>
-                    <rect width="400" height="500" fill={`url(#p-${project.id})`} />
-                  </svg>
-                  <div className="relative z-10 text-center px-8">
-                    <div className="font-display-italic text-6xl md:text-7xl mb-4" style={{ color: '#b8736e' }}>
-                      {project.number}
-                    </div>
-                    <div className="font-mono-fine text-[10px] uppercase tracking-[0.3em]" style={{ color: '#5a4a3f' }}>
-                      {project.href ? 'View case study' : 'Preview · Coming Soon'}
+              <div className="relative aspect-[4/3] mb-6 overflow-hidden" style={{ backgroundColor: '#f4e4dc' }}>
+                {project.thumb ? (
+                  <>
+                    <img
+                      src={project.thumb}
+                      alt={project.title}
+                      className="project-image absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(to top, rgba(31, 22, 17, 0.3), transparent 55%)' }} />
+                  </>
+                ) : (
+                  <div className="project-image absolute inset-0 flex items-center justify-center">
+                    <div className="absolute inset-0" style={{
+                      background: `linear-gradient(135deg, ${ph.from} 0%, ${ph.to} 100%)`
+                    }} />
+                    <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 400 500" preserveAspectRatio="none">
+                      <defs>
+                        <pattern id={`p-${project.id}`} x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                          <circle cx="20" cy="20" r="1" fill={ph.ink} />
+                        </pattern>
+                      </defs>
+                      <rect width="400" height="500" fill={`url(#p-${project.id})`} />
+                    </svg>
+                    <div className="relative z-10 text-center px-8">
+                      <div className="font-display-italic text-6xl md:text-7xl mb-4" style={{ color: ph.ink }}>
+                        {project.number}
+                      </div>
+                      <div className="font-mono-fine text-[10px] uppercase tracking-[0.3em]" style={{ color: ph.ink, opacity: 0.75 }}>
+                        {ph.label}
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
 
                 <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 z-20" style={{ backgroundColor: 'rgba(250, 245, 239, 0.9)', backdropFilter: 'blur(8px)' }}>
                   <span className="font-mono-fine text-[10px] uppercase tracking-[0.2em]" style={{ color: '#1f1611' }}>
@@ -433,7 +461,8 @@ export default function Home() {
                 </div>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-24 text-center">
@@ -457,20 +486,12 @@ export default function Home() {
               A little{' '}
               <span className="font-display-italic" style={{ color: '#b8736e' }}>about me</span>
             </h2>
-
-            <div className="relative aspect-[3/4] max-w-sm" style={{ backgroundColor: '#ebd4c8' }}>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-display-italic text-2xl" style={{ color: '#5a4a3f' }}>portrait</span>
-              </div>
-              <div className="absolute -bottom-4 -right-4 w-full h-full border" style={{ borderColor: '#b8736e' }} />
-            </div>
-          </div>
-
-          <div className="md:col-span-6 md:col-start-7 space-y-8">
             <p className="font-display text-2xl md:text-3xl leading-snug" style={{ color: '#1f1611' }}>
               I'm a Computer Science student at Stevens Institute of Technology, and most of what I do points toward design.
             </p>
+          </div>
 
+          <div className="md:col-span-6 md:col-start-7 space-y-8">
             <div className="space-y-6 font-display text-lg leading-relaxed" style={{ color: '#3a2e26' }}>
               <p>
                 I have a Visual Arts and Technology minor, and I spend most of my time on the design side of building things: interfaces, layouts, and the small details that make a product feel considered rather than thrown together.
@@ -569,7 +590,7 @@ export default function Home() {
       <footer className="relative px-8 md:px-12 py-12 border-t" style={{ borderColor: '#e8dcd0' }}>
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="font-mono-fine text-[10px] uppercase tracking-[0.3em]" style={{ color: '#5a4a3f' }}>
-            © 2026 Keona Hicks · Designed &amp; built with care
+            © 2026 Keona Hicks
           </div>
           <div className="font-mono-fine text-[10px] uppercase tracking-[0.3em]" style={{ color: '#5a4a3f' }}>
             Hoboken, NJ

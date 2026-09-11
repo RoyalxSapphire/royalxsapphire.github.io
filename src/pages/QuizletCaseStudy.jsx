@@ -367,7 +367,7 @@ export default function QuizletCaseStudy() {
       <section className="cs-section">
         <div className="cs-wrap">
           <div className="cs-eyebrow">Working as a team</div>
-          <h2 className="cs-h2">Four people, one deadline.</h2>
+          <h2 className="cs-h2">The deadline.</h2>
           <div className="cs-body">
             <p>
               The hardest part wasn't the design, it was the coordination. Getting four students with different
@@ -455,7 +455,6 @@ export default function QuizletCaseStudy() {
       {/* FOOTER */}
       <footer className="cs-footer">
         <div className="cs-wrap">
-          <p className="cs-footer-h">Built for warmth, <em>made</em> to work.</p>
           <p className="cs-footer-sub">Keona Hicks · UI/UX Design</p>
         </div>
       </footer>

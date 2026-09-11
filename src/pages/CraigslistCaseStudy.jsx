@@ -27,7 +27,7 @@ const STYLES = `
   --ink: #1B2336;
   --ink-soft: #46506b;
   --cobalt: #2643B6;
-  --cobalt-deep: #18266a;
+  --cobalt-deep: #20253b;
   --cream-panel: #E8E1CF;
   --blush: #C0617A;
   --link-blue: #1f44c4;
@@ -518,7 +518,7 @@ export default function CraigslistCaseStudy() {
       <section className="cs-section">
         <div className="cs-wrap">
           <div className="cs-eyebrow center">From insight to principle</div>
-          <h2 className="cs-h2 center">Three problems, three moves.</h2>
+          <h2 className="cs-h2 center">Three problems.</h2>
           <div className="cs-princ">
             <div className="cs-princ-card">
               <div className="cs-princ-tag">Load</div>
@@ -609,7 +609,7 @@ export default function CraigslistCaseStudy() {
       <section className="cs-section" ref={chartRef}>
         <div className="cs-wrap">
           <div className="cs-eyebrow center">Validation</div>
-          <h2 className="cs-h2 center">I didn't just say it was better. I measured it.</h2>
+          <h2 className="cs-h2 center">The measurements.</h2>
 
           <div className="cs-stat-row center">
             <div className="cs-stat">
@@ -704,7 +704,6 @@ export default function CraigslistCaseStudy() {
       {/* FOOTER */}
       <footer className="cs-footer">
         <div className="cs-wrap">
-          <p className="cs-footer-h">Designed with research, <em>backed</em> by data.</p>
           <p className="cs-footer-sub">Keona Hicks · UI/UX Design</p>
         </div>
       </footer>
