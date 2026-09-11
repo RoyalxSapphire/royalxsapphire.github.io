@@ -2,7 +2,7 @@
 
 The source for my design portfolio. Built with React and Vite, deployed on Vercel.
 
-**Live site:** [royalxsapphire.github.io](https://royalxsapphire.github.io) _(placeholder domain for now)_
+**Live site:** [royalxsapphire.github.io](keona-portfoliovercelapp.vercel.app) _(placeholder domain for now)_
 
 ---
 
